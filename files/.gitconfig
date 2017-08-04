@@ -1,0 +1,9 @@
+[user]
+	name = {git_user_name}
+	email = {git_user_email}
+[color]
+	ui = true
+[push]
+	default = simple
+[alias]
+	l = log --oneline --all --decorate --graph
