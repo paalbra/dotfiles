@@ -17,6 +17,7 @@ set wrap                          " wrap long lines
 set showbreak=»                   " display this at the start of wrapped lines
 set statusline=%<%F\ %h%m%r%w\ (%Y)%=%-14.(%l,%c%V%)\ %P " see :help statusline
 set noendofline                   " don't write <EOL> at the end of file
+set nofixendofline                " don't 'fix' missing <EOL> at the end of file
 set cursorline                    " highlight the current line
 set encoding=utf-8                " set encoding to utf-8
 
