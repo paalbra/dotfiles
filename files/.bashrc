@@ -6,9 +6,29 @@ if [ -f /etc/bashrc ]; then
     source /etc/bashrc
 fi
 
+# Colors
+
+COLOR_RESET='\[\033[0m\]'
+COLOR_RED='\[\033[38;5;196m\]'
+COLOR_BLUE='\[\033[38;5;39m\]'
+COLOR_GREEN='\[\033[38;5;118m\]'
+COLOR_YELLOW='\[\033[38;5;226m\]'
+COLOR_ORANGE='\[\033[38;5;214m\]'
+COLOR_MAGENTA='\[\033[38;5;201m\]'
+
 # Prompt
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\](\j):\[\033[01;34m\]\w\[\033[00m\]\n\$ '
+DISTRO_ID=$(lsb_release -s -i)
+DISTRO_COLOR=$COLOR_RESET
+if echo $DISTRO_ID | grep -q "RedHat"; then
+    DISTRO_COLOR=$COLOR_RED
+elif echo $DISTRO_ID | grep -q "Fedora"; then
+    DISTRO_COLOR=$COLOR_MAGENTA
+elif echo $DISTRO_ID | grep -q "Ubuntu"; then
+    DISTRO_COLOR=$COLOR_ORANGE
+fi
+
+PS1="\${debian_chroot:+(\$debian_chroot)}$COLOR_BLUE\u$COLOR_RESET@$DISTRO_COLOR\h$COLOR_RESET(\j):$COLOR_BLUE\w$COLOR_RESET\n\$ "
 
 # Aliases
 
