@@ -30,6 +30,10 @@ fi
 
 PS1="\${debian_chroot:+(\$debian_chroot)}$COLOR_BLUE\u$COLOR_RESET@$DISTRO_COLOR\h$COLOR_RESET(\j):$COLOR_BLUE\w$COLOR_RESET\n\$ "
 
+# Variables
+
+export GPG_TTY=$(tty)
+
 # Aliases
 
 alias ls='ls --color=auto'
