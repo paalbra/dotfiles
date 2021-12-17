@@ -18,7 +18,7 @@ COLOR_MAGENTA='\[\033[38;5;201m\]'
 
 # Prompt
 
-DISTRO_ID=$(bash -c 'if [ -f /etc/os-release ]; then source /etc/os-release && echo $PRETTY_NAME; else echo "Unknown"; fi')
+DISTRO_ID=$(bash --norc -c 'if [ -f /etc/os-release ]; then source /etc/os-release && echo $PRETTY_NAME; else echo "Unknown"; fi')
 DISTRO_COLOR=$COLOR_RESET
 if echo $DISTRO_ID | grep -q "Red Hat Enterprise Linux"; then
     DISTRO_COLOR=$COLOR_RED
