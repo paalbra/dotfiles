@@ -18,14 +18,16 @@ COLOR_MAGENTA='\[\033[38;5;201m\]'
 
 # Prompt
 
-DISTRO_ID=$(lsb_release -s -i)
+DISTRO_ID=$(bash -c 'if [ -f /etc/os-release ]; then source /etc/os-release && echo $PRETTY_NAME; else echo "Unknown"; fi')
 DISTRO_COLOR=$COLOR_RESET
-if echo $DISTRO_ID | grep -q "RedHat"; then
+if echo $DISTRO_ID | grep -q "Red Hat Enterprise Linux"; then
     DISTRO_COLOR=$COLOR_RED
 elif echo $DISTRO_ID | grep -q "Fedora"; then
     DISTRO_COLOR=$COLOR_MAGENTA
 elif echo $DISTRO_ID | grep -q "Ubuntu"; then
     DISTRO_COLOR=$COLOR_ORANGE
+elif echo $DISTRO_ID | grep -q "Raspbian"; then
+    DISTRO_COLOR=$COLOR_GREEN
 fi
 
 PS1="\${debian_chroot:+(\$debian_chroot)}$COLOR_BLUE\u$COLOR_RESET@$DISTRO_COLOR\h$COLOR_RESET(\j):$COLOR_BLUE\w$COLOR_RESET\n\$ "
