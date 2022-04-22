@@ -62,6 +62,15 @@ function hostrev {
     for ip in $(dig +noall +answer $host | awk '{print $NF}'); do dig +noall +answer -x $ip; done | awk '{print $NF}' | sort
 }
 
+function s_client {
+    if [ -z "$1" ]; then
+        echo USAGE: s_client HOST [PORT]
+        return 1
+    fi
+    local HOST="${1}"
+    local PORT=${2:-443}
+    openssl s_client -connect "$HOST":"$PORT" < /dev/null 2> /dev/null | openssl x509 -noout -dates -subject -issuer -ext subjectAltName
+}
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
