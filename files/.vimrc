@@ -39,11 +39,11 @@ set foldlevel=1                   " fold from the beginning
 
 " colors
 colorscheme delek
-highlight Normal    ctermbg=black guibg=black
-highlight LineNr    ctermfg=darkgrey guifg=darkgrey
+highlight Normal    ctermfg=grey ctermbg=black
+highlight LineNr    ctermfg=darkgrey
 "highlight Comment   ctermfg=darkblue
 "highlight ModeMsg   cterm=NONE ctermfg=white guifg=white
-highlight Search    ctermfg=0 ctermbg=3 guifg=Black guibg=Yellow
+highlight Search    ctermfg=black ctermbg=yellow
 highlight Pmenu     ctermbg=blue cterm=bold
 
 " indenting
