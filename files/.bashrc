@@ -47,6 +47,11 @@ alias upper='tr "[:lower:]" "[:upper:]"'
 
 # Functions
 
+function color {
+    # Colorize stderr
+    (set -o pipefail;"$@" 2>&1>&3|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1
+}
+
 function hostrev {
     if [[ $# -ne 1 ]]; then
         echo Usage: ${FUNCNAME[0]} hostname
