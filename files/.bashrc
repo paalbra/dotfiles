@@ -47,6 +47,15 @@ alias upper='tr "[:lower:]" "[:upper:]"'
 
 # Functions
 
+function amap {
+    # Aggressive nmap port scan
+    TARGET=$1
+    shift
+    PORTS=$1
+    shift
+    nmap -n -T4 -Pn --max-rtt-timeout 50ms --initial-rtt-timeout 50ms --min-hostgroup 512 -oG - -open -p $PORTS $TARGET "$@"
+}
+
 function color {
     # Colorize stderr
     (set -o pipefail;"$@" 2>&1>&3|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1
