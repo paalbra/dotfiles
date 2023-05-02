@@ -35,6 +35,7 @@ PS1="\${debian_chroot:+(\$debian_chroot)}$COLOR_BLUE\u$COLOR_RESET@$DISTRO_COLOR
 # Variables
 
 export GPG_TTY=$(tty)
+HISTCONTROL=ignoreboth
 
 # Aliases
 
