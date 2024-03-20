@@ -14,20 +14,29 @@ COLOR_BLUE='\[\033[38;5;39m\]'
 COLOR_GREEN='\[\033[38;5;118m\]'
 COLOR_YELLOW='\[\033[38;5;226m\]'
 COLOR_ORANGE='\[\033[38;5;214m\]'
+COLOR_CYAN='\[\033[38;5;51m\]'
 COLOR_MAGENTA='\[\033[38;5;201m\]'
 
 # Prompt
 
-DISTRO_ID=$(bash --norc -c 'if [ -f /etc/os-release ]; then source /etc/os-release && echo $PRETTY_NAME; else echo "Unknown"; fi')
-DISTRO_COLOR=$COLOR_RESET
-if echo $DISTRO_ID | grep -q "Red Hat Enterprise Linux"; then
-    DISTRO_COLOR=$COLOR_RED
-elif echo $DISTRO_ID | grep -q "Fedora"; then
-    DISTRO_COLOR=$COLOR_MAGENTA
-elif echo $DISTRO_ID | grep -q "Ubuntu"; then
-    DISTRO_COLOR=$COLOR_ORANGE
-elif echo $DISTRO_ID | grep -q "Raspbian"; then
-    DISTRO_COLOR=$COLOR_GREEN
+if [ -f /etc/os-release ]; then
+    DISTRO_ID=$(bash --norc -c 'source /etc/os-release && echo ${PRETTY_NAME}')
+    DISTRO_COLOR="\[\033[$(bash --norc -c 'source /etc/os-release && echo ${ANSI_COLOR}')m\]"
+else
+    DISTRO_ID="Unknown"
+fi
+
+if [ -z "$DISTRO_COLOR" ]; then
+    DISTRO_COLOR=$COLOR_RESET
+    if echo $DISTRO_ID | grep -q "Red Hat Enterprise Linux"; then
+        DISTRO_COLOR=$COLOR_RED
+    elif echo $DISTRO_ID | grep -q "Fedora"; then
+        DISTRO_COLOR=$COLOR_MAGENTA
+    elif echo $DISTRO_ID | grep -q "Ubuntu"; then
+        DISTRO_COLOR=$COLOR_ORANGE
+    elif echo $DISTRO_ID | grep -q "Raspbian"; then
+        DISTRO_COLOR=$COLOR_GREEN
+    fi
 fi
 
 PS1="\${debian_chroot:+(\$debian_chroot)}$COLOR_BLUE\u$COLOR_RESET@$DISTRO_COLOR\h$COLOR_RESET(\j):$COLOR_BLUE\w$COLOR_RESET\n\$ "
