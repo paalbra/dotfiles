@@ -7,4 +7,5 @@
 	default = simple
 [alias]
 	l = log --oneline --all --decorate --graph
+	s = show --name-only
 	taglist = log --tags --simplify-by-decoration --pretty='format:%cs %h %D'
